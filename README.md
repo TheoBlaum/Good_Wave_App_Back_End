@@ -6,6 +6,7 @@ Une API REST en Go utilisant le framework Gin
 
 ```
 good_wave_back_end/
+├── data/           # Fichiers JSON
 ├── api/            # Contient les définitions des routes API
 ├── config/         # Configuration de l'application
 ├── handlers/       # Gestionnaires des requêtes HTTP
