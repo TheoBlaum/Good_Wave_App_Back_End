@@ -1,17 +1,18 @@
 package main
 
 import (
+	"good_wave_back_end/api"
+
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	r := gin.Default()
+	// Initialiser le routeur Gin
+	router := gin.Default()
 
-	r.GET("/message", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "test OK",
-		})
-	})
+	// Configurer les routes
+	api.SetupRoutes(router)
 
-	r.Run() // écoute sur :8080 par défaut
+	// Démarrer le serveur
+	router.Run(":8080")
 }
