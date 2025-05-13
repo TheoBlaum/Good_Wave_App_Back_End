@@ -9,4 +9,6 @@ import (
 func SetupRoutes(router *gin.Engine) {
 	// Route pour obtenir tous les spots de surf
 	router.GET("/api/surf-spots", handlers.GetSurfSpots)
+	// Route pour lister les spots de surf
+	router.GET("/surf-spots", handlers.ListSurfSpots)
 }
