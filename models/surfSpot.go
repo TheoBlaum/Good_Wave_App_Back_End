@@ -8,4 +8,5 @@ type SurfSpotList struct {
 	PeakSeasonEnds   string   `json:"peak_season_ends"`
 	SurfBreak        []string `json:"surf_break"`
 	DifficultyLevel  int      `json:"difficulty_level"`
+	ForecastURL		string		`json:"Magic Seaweed Link"`
 }
