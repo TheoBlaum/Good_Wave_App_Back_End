@@ -183,6 +183,50 @@
         "Address": ""
       },
       "createdTime": "2025-05-14T12:07:15+02:00"
+    },
+    {
+      "id": "20250514151107",
+      "fields": {
+        "Surf Break": [
+          "Reef Break"
+        ],
+        "Difficulty Level": 3,
+        "Destination": "Pascuales Beach",
+        "Geocode": "18.858270, -103.963884",
+        "Influencers": [],
+        "Magic Seaweed Link": "https://www.surfline.com/surf-report/pascuales/584204204e65fad6a770920d",
+        "Photos": [
+          {
+            "id": "20250514151107_\u0000",
+            "url": "https://i.pinimg.com/originals/fb/8e/18/fb8e182dc76b312adc58a029b4fc55c7.jpg",
+            "filename": "photo_20250514151107_\u0000.jpg",
+            "size": 0,
+            "type": "image/jpeg",
+            "thumbnails": {
+              "small": {
+                "url": "https://i.pinimg.com/originals/fb/8e/18/fb8e182dc76b312adc58a029b4fc55c7.jpg",
+                "width": 800,
+                "height": 600
+              },
+              "large": {
+                "url": "https://i.pinimg.com/originals/fb/8e/18/fb8e182dc76b312adc58a029b4fc55c7.jpg",
+                "width": 800,
+                "height": 600
+              },
+              "full": {
+                "url": "https://i.pinimg.com/originals/fb/8e/18/fb8e182dc76b312adc58a029b4fc55c7.jpg",
+                "width": 800,
+                "height": 600
+              }
+            }
+          }
+        ],
+        "Peak Surf Season Begins": "2025-06-18",
+        "Destination State/Country": "Colima, Mexico",
+        "Peak Surf Season Ends": "2025-08-27",
+        "Address": ""
+      },
+      "createdTime": "2025-05-14T15:11:07+02:00"
     }
   ],
   "offset": "rech5ennHFNOtB1Wt"
