@@ -23,6 +23,7 @@ type SurfSpotResponse struct {
 			PeakSeasonEnds   string   `json:"Peak Surf Season Ends"`
 			SurfBreak        []string `json:"Surf Break"`
 			DifficultyLevel  int      `json:"Difficulty Level"`
+			ForecastURL		string		`json:"Magic Seaweed Link"`
 		} `json:"fields"`
 	} `json:"records"`
 }
@@ -53,6 +54,7 @@ func ListSurfSpots(c *gin.Context) {
 			PeakSeasonEnds:   record.Fields.PeakSeasonEnds,
 			SurfBreak:        record.Fields.SurfBreak,
 			DifficultyLevel:  record.Fields.DifficultyLevel,
+			ForecastURL:  	  record.Fields.ForecastURL,
 		}
 
 		// Ajouter l'URL de la photo si elle existe
