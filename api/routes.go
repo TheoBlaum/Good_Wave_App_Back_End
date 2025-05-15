@@ -11,6 +11,6 @@ func SetupRoutes(router *gin.Engine) {
 	router.GET("/api/surf-spots", handlers.GetSurfSpots)
 	// Route pour lister les spots de surf
 	router.GET("/surf-spots", handlers.ListSurfSpots)
-	// Route pour ajouter un nouveau spot de surf
+	// Route pour ajouter un nouveau spot de surf 
 	router.POST("/api/surf-spots", handlers.AddSurfSpot)
 }
