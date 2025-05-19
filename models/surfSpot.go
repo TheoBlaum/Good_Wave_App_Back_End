@@ -14,4 +14,5 @@ type SurfSpot struct {
 	Photo       string             `bson:"photo" json:"photo"`
 	Link        string             `bson:"link" json:"link"`
 	Geocode     string             `bson:"geocode" json:"geocode"`
+	Saved        bool               `bson:"saved" json:"saved"`
 }

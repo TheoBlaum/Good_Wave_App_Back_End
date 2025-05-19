@@ -13,4 +13,7 @@ func SetupRoutes(router *gin.Engine) {
 	router.GET("/surf-spots", handlers.ListSurfSpots)
 	// Route pour ajouter un nouveau spot de surf 
 	router.POST("/api/surf-spots", handlers.AddSurfSpot)
+	// Route pour ajouter ou enlever un spot de la liste des favoris	
+	router.PUT("/api/surf-spots/:id", handlers.UpdateSavedStatus)
+
 }
