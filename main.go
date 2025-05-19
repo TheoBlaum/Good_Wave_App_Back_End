@@ -2,16 +2,34 @@ package main
 
 import (
 	//"context"
-	"log"
 	"good_wave_back_end/api"
 	"good_wave_back_end/database"
+	"log"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func main() {
+	// Charger les variables d'environnement
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Erreur lors du chargement du fichier .env")
+	}
+
+	// Récupérer les variables d'environnement
+	mongodbURI := os.Getenv("MONGODB_URI")
+	if mongodbURI == "" {
+		log.Fatal("La variable d'environnement MONGODB_URI n'est pas définie")
+	}
+
+	dbName := os.Getenv("MONGODB_DB_NAME")
+	if dbName == "" {
+		log.Fatal("La variable d'environnement MONGODB_DB_NAME n'est pas définie")
+	}
+
 	// Initialiser le routeur Gin
 	router := gin.Default()
 
@@ -27,9 +45,8 @@ func main() {
 
 	// Connexion à MongoDB selon la documentation
 	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
-	uri := "mongodb+srv://admin:admin@goodwave.db0uaj7.mongodb.net/?retryWrites=true&w=majority&appName=GoodWave"
-	
-	err := database.ConnectWithOptions(uri, "GoodWave", serverAPI)
+
+	err := database.ConnectWithOptions(mongodbURI, dbName, serverAPI)
 	if err != nil {
 		log.Fatal("Erreur de connexion à MongoDB: ", err)
 	}
