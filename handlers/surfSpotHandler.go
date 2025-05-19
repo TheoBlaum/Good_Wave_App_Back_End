@@ -2,13 +2,15 @@ package handlers
 
 import (
 	"context"
-	"time"
 	"net/http"
+	"time"
+
+	"good_wave_back_end/database"
+	"good_wave_back_end/models"
 
 	"github.com/gin-gonic/gin"
-	"good_wave_back_end/models"
-	"good_wave_back_end/database"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func ListSurfSpots(c *gin.Context) {
@@ -52,4 +54,36 @@ func AddSurfSpot(c *gin.Context) {
 		"message": "Spot ajouté avec succès",
 		"id":      result.InsertedID,
 	})
+}
+
+func UpdateSavedStatus(c *gin.Context) {
+	var request struct {
+		ID    string `json:"destination"`
+		Saved bool   `json:"saved"`
+	}
+
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "JSON invalide"})
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	objID, err := primitive.ObjectIDFromHex(request.ID)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID invalide"})
+		return
+	}
+
+	filter := bson.M{"_id": objID}
+	update := bson.M{"$set": bson.M{"saved": request.Saved}}
+
+	_, err = database.MongoDB.Collection("surfSpots").UpdateOne(ctx, filter, update)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la mise à jour du spot"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Spot mis à jour avec succès"})
 }
