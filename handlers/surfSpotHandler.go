@@ -10,7 +10,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func ListSurfSpots(c *gin.Context) {
@@ -58,8 +57,7 @@ func AddSurfSpot(c *gin.Context) {
 
 func UpdateSavedStatus(c *gin.Context) {
 	var request struct {
-		ID    string `json:"destination"`
-		Saved bool   `json:"saved"`
+		Saved bool `json:"saved"`
 	}
 
 	if err := c.ShouldBindJSON(&request); err != nil {
@@ -67,19 +65,20 @@ func UpdateSavedStatus(c *gin.Context) {
 		return
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	objID, err := primitive.ObjectIDFromHex(request.ID)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "ID invalide"})
+	spotID := c.Param("id")
+	if spotID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID du spot manquant"})
 		return
 	}
 
-	filter := bson.M{"_id": objID}
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	// Utiliser directement l'ID comme string au lieu de le convertir en ObjectID
+	filter := bson.M{"_id": spotID}
 	update := bson.M{"$set": bson.M{"saved": request.Saved}}
 
-	_, err = database.MongoDB.Collection("surfSpots").UpdateOne(ctx, filter, update)
+	_, err := database.MongoDB.Collection("surfSpots").UpdateOne(ctx, filter, update)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la mise à jour du spot"})
 		return
