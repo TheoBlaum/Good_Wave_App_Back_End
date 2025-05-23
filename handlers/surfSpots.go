@@ -55,10 +55,11 @@ func GetSurfSpots(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	// Options de pagination pour MongoDB
+	// Options de pagination pour MongoDB avec tri par ID
 	findOptions := options.Find().
 		SetSkip(int64(skip)).
-		SetLimit(int64(pageSizeNum))
+		SetLimit(int64(pageSizeNum)).
+		SetSort(bson.D{{Key: "_id", Value: 1}}) // Trier par ID croissant
 
 	// Compter le nombre total de documents
 	totalItems, err := database.MongoDB.Collection("surfSpots").CountDocuments(ctx, bson.M{})
